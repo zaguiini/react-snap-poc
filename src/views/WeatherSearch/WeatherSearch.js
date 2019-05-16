@@ -14,7 +14,9 @@ const weatherSearchValidationSchema = object().shape({
 })
 
 function WeatherSearch({location, history}) {
-  const initialWeatherSearchValues = React.useMemo(() => {
+  const [results, setResults] = React.useState(null)
+  
+  const weatherSearchValues = React.useMemo(() => {
     const values = qs.parse(location.search)
     
     return {
@@ -22,12 +24,8 @@ function WeatherSearch({location, history}) {
     }
   }, [location.search])
   
-  const [city, setCity] = React.useState(initialWeatherSearchValues.city)
-  const [results, setResults] = React.useState(null)
 
   const handleSubmit = React.useCallback((values) => {
-    setCity(values.city)
-    
     history.replace({
       search: qs.stringify({
         city: values.city,
@@ -35,12 +33,15 @@ function WeatherSearch({location, history}) {
     })
   }, [history])
 
-  useWeatherResults({ setResults, city })
+  useWeatherResults({
+    setResults,
+    city: weatherSearchValues.city,
+  })
 
   return (
     <div>
       <Formik
-        initialValues={initialWeatherSearchValues}
+        initialValues={weatherSearchValues}
         enableReinitialize
         validationSchema={weatherSearchValidationSchema}
         component={WeatherSearchForm}
