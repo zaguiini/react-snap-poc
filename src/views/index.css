@@ -1,0 +1,13 @@
+ul {
+  /* margin: 0; */
+  padding: 0;
+}
+
+ul > li {
+    display: inline-block;
+    /* You can also add some margins here to make it look prettier */
+    zoom:1;
+    margin-right: 1rem;
+    *display:inline;
+    /* this fix is needed for IE7- */
+}
