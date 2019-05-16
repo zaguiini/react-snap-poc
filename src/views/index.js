@@ -6,7 +6,7 @@ import './index.css'
 import WeatherSearch from './WeatherSearch/WeatherSearch'
 import About from './About/About'
 
-function Routes() {
+function RoutesNavigation() {
   return (
     <nav>
       <ul>
@@ -20,10 +20,9 @@ function Routes() {
 function Main() {
   return (
     <Router>
-      <Routes />
+      <RoutesNavigation />
       <Route exact path="/about" component={About} />
       <Route exact path="/" component={WeatherSearch} />
-      {/* <Route exact path="/gender" component={GenderSearch} /> */}
     </Router>
   )
 }
